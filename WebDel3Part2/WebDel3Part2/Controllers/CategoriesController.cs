@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +10,6 @@ using WebDel3Part2.Models;
 
 namespace WebDel3Part2.Controllers
 {
-    [Authorize]
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _context;
