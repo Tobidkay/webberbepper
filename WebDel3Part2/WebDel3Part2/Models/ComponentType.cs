@@ -13,7 +13,7 @@ namespace WebDel3Part2.Models
         public string ComponentName { get; set; }
         public string ComponentInfo { get; set; }
         public string Location { get; set; }
-        public ComponentTypeStatus Status { get; set; }
+        public ComponentStatus Status { get; set; }
         public string Datasheet { get; set; }
         public string ImageUrl { get; set; }
         public string Manufacturer { get; set; }
