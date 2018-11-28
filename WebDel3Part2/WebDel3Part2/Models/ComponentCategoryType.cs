@@ -8,12 +8,12 @@ namespace WebDel3Part2.Models
         
         [Key]
         [Column(Order = 0)]
-        public int CategoryId { get; set; }
+        public long CategoryId { get; set; }
         public Category Category { get; set; }
 
         [Key]
         [Column(Order = 1)]
-        public int ComponentTypeId { get; set; }
+        public long ComponentTypeId { get; set; }
         public ComponentType ComponentType { get; set; }
     }
 }

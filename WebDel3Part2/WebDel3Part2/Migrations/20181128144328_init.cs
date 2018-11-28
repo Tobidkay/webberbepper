@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebDel3Part2.Migrations
 {
-    public partial class LetsTryAgain : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -238,25 +238,25 @@ namespace WebDel3Part2.Migrations
                 name: "ComponentCategoryTypes",
                 columns: table => new
                 {
-                    CategoryId = table.Column<int>(nullable: false),
-                    ComponentTypeId = table.Column<int>(nullable: false),
-                    ComponentTypeId1 = table.Column<long>(nullable: true)
+                    CategoryId = table.Column<long>(nullable: false),
+                    CategoryId1 = table.Column<int>(nullable: true),
+                    ComponentTypeId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ComponentCategoryTypes", x => new { x.CategoryId, x.ComponentTypeId });
                     table.ForeignKey(
-                        name: "FK_ComponentCategoryTypes_Category_CategoryId",
-                        column: x => x.CategoryId,
+                        name: "FK_ComponentCategoryTypes_Category_CategoryId1",
+                        column: x => x.CategoryId1,
                         principalTable: "Category",
                         principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ComponentCategoryTypes_ComponentType_ComponentTypeId1",
-                        column: x => x.ComponentTypeId1,
+                        name: "FK_ComponentCategoryTypes_ComponentType_ComponentTypeId",
+                        column: x => x.ComponentTypeId,
                         principalTable: "ComponentType",
                         principalColumn: "ComponentTypeId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -304,9 +304,14 @@ namespace WebDel3Part2.Migrations
                 column: "ComponentTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ComponentCategoryTypes_ComponentTypeId1",
+                name: "IX_ComponentCategoryTypes_CategoryId1",
                 table: "ComponentCategoryTypes",
-                column: "ComponentTypeId1");
+                column: "CategoryId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ComponentCategoryTypes_ComponentTypeId",
+                table: "ComponentCategoryTypes",
+                column: "ComponentTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ComponentType_ImageESImageId",

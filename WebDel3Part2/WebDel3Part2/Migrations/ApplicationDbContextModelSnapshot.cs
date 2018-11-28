@@ -226,15 +226,17 @@ namespace WebDel3Part2.Migrations
 
             modelBuilder.Entity("WebDel3Part2.Models.ComponentCategoryType", b =>
                 {
-                    b.Property<int>("CategoryId");
+                    b.Property<long>("CategoryId");
 
-                    b.Property<int>("ComponentTypeId");
+                    b.Property<long>("ComponentTypeId");
 
-                    b.Property<long?>("ComponentTypeId1");
+                    b.Property<int?>("CategoryId1");
 
                     b.HasKey("CategoryId", "ComponentTypeId");
 
-                    b.HasIndex("ComponentTypeId1");
+                    b.HasIndex("CategoryId1");
+
+                    b.HasIndex("ComponentTypeId");
 
                     b.ToTable("ComponentCategoryTypes");
                 });
@@ -347,12 +349,12 @@ namespace WebDel3Part2.Migrations
                 {
                     b.HasOne("WebDel3Part2.Models.Category", "Category")
                         .WithMany("ComponentCategoryTypes")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CategoryId1");
 
                     b.HasOne("WebDel3Part2.Models.ComponentType", "ComponentType")
                         .WithMany("ComponentCategoryTypes")
-                        .HasForeignKey("ComponentTypeId1");
+                        .HasForeignKey("ComponentTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("WebDel3Part2.Models.ComponentType", b =>
