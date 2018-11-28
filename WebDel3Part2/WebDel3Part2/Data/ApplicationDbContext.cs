@@ -19,7 +19,7 @@ namespace WebDel3Part2.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ComponentCategoryType>()
-                .HasKey(c => new { c.CategoryId, c.ComponentTypeId });
+                .HasKey(cc => new { cc.CategoryId, cc.ComponentTypeId });
         }
         //Setting composit keys with fluent API
         public DbSet<WebDel3Part2.Models.Component> Component { get; set; }
@@ -27,5 +27,6 @@ namespace WebDel3Part2.Data
         public DbSet<WebDel3Part2.Models.Category> Category { get; set; }
         //Setting composit keys with fluent API
         public DbSet<WebDel3Part2.Models.ComponentType> ComponentType { get; set; }
+        public DbSet<ComponentCategoryType> ComponentCategoryTypes { get; set; }
     }
 }

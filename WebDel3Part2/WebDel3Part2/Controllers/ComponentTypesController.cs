@@ -22,6 +22,12 @@ namespace WebDel3Part2.Controllers
         // GET: ComponentTypes
         public async Task<IActionResult> Index()
         {
+            var comTypeVMList = new List<ComTypeViewModel>();
+            var comTypeList = await _context.ComponentType.ToListAsync();
+            foreach (var comType in comTypeList)
+            {
+                
+            }
             return View(await _context.ComponentType.ToListAsync());
         }
 

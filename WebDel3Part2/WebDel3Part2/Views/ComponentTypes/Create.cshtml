@@ -1,4 +1,4 @@
-﻿@model WebDel3Part2.Models.ComponentType
+﻿@model WebDel3Part2.Models.ComTypeViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -13,49 +13,53 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ComponentName" class="control-label"></label>
-                <input asp-for="ComponentName" class="form-control" />
-                <span asp-validation-for="ComponentName" class="text-danger"></span>
+                <label asp-for="ComponentType.ComponentName" class="control-label"></label>
+                <input asp-for="ComponentType.ComponentName" class="form-control" />
+                <span asp-validation-for="ComponentType.ComponentName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ComponentInfo" class="control-label"></label>
-                <input asp-for="ComponentInfo" class="form-control" />
-                <span asp-validation-for="ComponentInfo" class="text-danger"></span>
+                <label asp-for="ComponentType.ComponentInfo" class="control-label"></label>
+                <input asp-for="ComponentType.ComponentInfo" class="form-control" />
+                <span asp-validation-for="ComponentType.ComponentInfo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
+                <label asp-for="ComponentType.Location" class="control-label"></label>
+                <input asp-for="ComponentType.Location" class="form-control" />
+                <span asp-validation-for="ComponentType.Location" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" asp-items="Html.GetEnumSelectList<ComponentStatus>()" class="form-control"></select>
-                <span asp-validation-for="Status" class="text-danger"></span>
+                <label asp-for="ComponentType.Status" class="control-label"></label>
+                <select asp-for="ComponentType.Status" asp-items="Html.GetEnumSelectList<ComponentStatus>()" class="form-control"></select>
+                <span asp-validation-for="ComponentType.Status" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Datasheet" class="control-label"></label>
-                <input asp-for="Datasheet" class="form-control" />
-                <span asp-validation-for="Datasheet" class="text-danger"></span>
+                <label asp-for="ComponentType.Datasheet" class="control-label"></label>
+                <input asp-for="ComponentType.Datasheet" class="form-control" />
+                <span asp-validation-for="ComponentType.Datasheet" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ImageUrl" class="control-label"></label>
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                <label asp-for="ComponentType.ImageUrl" class="control-label"></label>
+                <input asp-for="ComponentType.ImageUrl" class="form-control" />
+                <span asp-validation-for="ComponentType.ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Manufacturer" class="control-label"></label>
-                <input asp-for="Manufacturer" class="form-control" />
-                <span asp-validation-for="Manufacturer" class="text-danger"></span>
+                <label asp-for="ComponentType.Manufacturer" class="control-label"></label>
+                <input asp-for="ComponentType.Manufacturer" class="form-control" />
+                <span asp-validation-for="ComponentType.Manufacturer" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="WikiLink" class="control-label"></label>
-                <input asp-for="WikiLink" class="form-control" />
-                <span asp-validation-for="WikiLink" class="text-danger"></span>
+                <label asp-for="ComponentType.WikiLink" class="control-label"></label>
+                <input asp-for="ComponentType.WikiLink" class="form-control" />
+                <span asp-validation-for="ComponentType.WikiLink" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="AdminComment" class="control-label"></label>
-                <input asp-for="AdminComment" class="form-control" />
-                <span asp-validation-for="AdminComment" class="text-danger"></span>
+                <label asp-for="ComponentType.AdminComment" class="control-label"></label>
+                <input asp-for="ComponentType.AdminComment" class="form-control" />
+                <span asp-validation-for="ComponentType.AdminComment" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Categories" class="control-label"></label>
+                <select asp-for="ChoosenCategories" multiple="multiple" asp-items="Model.Categories" class="form-control"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
