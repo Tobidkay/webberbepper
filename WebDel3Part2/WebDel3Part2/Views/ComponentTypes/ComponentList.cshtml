@@ -1,0 +1,69 @@
+﻿@model IEnumerable<WebDel3Part2.Models.Component>
+
+@{
+    ViewData["Title"] = "ComponentList";
+}
+
+<h2>Component List</h2>
+
+@if (Model == null || Model.Count() == 0)
+{
+    <p>This component type does not have any components yet. Go to <a asp-action="Index" asp-controller="Components">Components</a> to add some</p>
+}
+else
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ComponentNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SerialNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdminComment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserComment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentLoanInformationId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComponentNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SerialNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AdminComment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserComment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentLoanInformationId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ComponentId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ComponentId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ComponentId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>    
+}

@@ -46,6 +46,18 @@ namespace WebDel3Part2.Controllers
         // GET: Components/Create
         public IActionResult Create()
         {
+            var componentTypes = _context.ComponentType.Select(x => x.ComponentTypeId).ToList();
+            var viewBagList = new List<SelectListItem>();
+            foreach (var componentType in componentTypes)
+            {
+                viewBagList.Add(new SelectListItem()
+                {
+                    Value = componentType.ToString(),
+                    Text = componentType.ToString()
+                });
+            }
+
+            ViewBag.ComponentTypeId = viewBagList;
             return View();
         }
 
@@ -78,6 +90,19 @@ namespace WebDel3Part2.Controllers
             {
                 return NotFound();
             }
+
+            var componentTypes = _context.ComponentType.Select(x => x.ComponentTypeId).ToList();
+            var viewBagList = new List<SelectListItem>();
+            foreach (var componentType in componentTypes)
+            {
+                viewBagList.Add(new SelectListItem()
+                {
+                    Value = componentType.ToString(),
+                    Text = componentType.ToString()
+                });
+            }
+
+            ViewBag.ComponentTypeId = viewBagList;
             return View(component);
         }
 

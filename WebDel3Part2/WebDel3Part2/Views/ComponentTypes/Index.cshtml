@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                Image
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.ComponentType.ComponentName)
             </th>
             <th>
@@ -49,6 +52,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @if (item.ComponentType.Image != null)
+                {
+                    <img src="data:image;base64,@System.Convert.ToBase64String(item.ComponentType.Image.Thumbnail)" />
+                }
+                else
+                { 
+                    <label for="Image">No Picture</label>
+                }
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.ComponentType.ComponentName)
             </td>
             <td>
@@ -84,7 +97,8 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ComponentType.ComponentTypeId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ComponentType.ComponentTypeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ComponentType.ComponentTypeId">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.ComponentType.ComponentTypeId">Delete</a> |
+                <a asp-action="ComponentList" asp-route-id="@item.ComponentType.ComponentTypeId">Components</a>
             </td>
         </tr>
 }

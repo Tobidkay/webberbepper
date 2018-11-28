@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -24,7 +29,7 @@ namespace WebDel3Part2.Controllers
         public async Task<IActionResult> Index()
         {
             var comTypeVMList = new List<ComTypeViewModel>();
-            var comTypeList = await _context.ComponentType.ToListAsync();
+            var comTypeList = await _context.ComponentType.Include(x => x.Image).ToListAsync();
             foreach (var comType in comTypeList)
             {
                 var categoryIds = await _context.ComponentCategoryTypes
@@ -34,7 +39,6 @@ namespace WebDel3Part2.Controllers
                 {
                     categoryNames.Add(await _context.Category.Where(cat => cat.CategoryId == id).Select(i => i.Name).FirstOrDefaultAsync());
                 }
-
                 comTypeVMList.Add(new ComTypeViewModel()
                 {
                     ComponentType = comType,
@@ -125,6 +129,35 @@ namespace WebDel3Part2.Controllers
                 componentTypeViewModel.ComponentType.ComponentCategoryTypes = componentCategoryTypes;
             }
 
+            var image = new ESImage();
+            Bitmap target = new Bitmap(64,64);
+            Bitmap imageFullSize;
+            if (componentTypeViewModel.Image != null)
+            {
+                using (var memoryStream = new MemoryStream())
+                {
+                    await componentTypeViewModel.Image.CopyToAsync(memoryStream);
+                    image.ImageData = memoryStream.ToArray();
+                    imageFullSize = new Bitmap(memoryStream);
+                }
+
+                using (var graphics = Graphics.FromImage(target))
+                {
+                    graphics.CompositingQuality = CompositingQuality.HighSpeed;
+                    graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    graphics.CompositingMode = CompositingMode.SourceCopy;
+                    graphics.DrawImage(imageFullSize, 0, 0, 64, 64);
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        target.Save(memoryStream, ImageFormat.Png);
+                        image.Thumbnail = memoryStream.ToArray();
+                    }
+                }
+                image.ImageMimeType = "image/png";
+                componentTypeViewModel.ComponentType.Image = image;
+                _context.EsImages.Add(image);
+            }
+
             _context.Add(componentTypeViewModel.ComponentType);
             await _context.SaveChangesAsync();
 
@@ -158,6 +191,7 @@ namespace WebDel3Part2.Controllers
                     categoryNames.Add(categoryName);
                 }
             }
+
 
             var comTypeVM = new ComTypeViewModel()
             {
@@ -204,6 +238,36 @@ namespace WebDel3Part2.Controllers
                     }
                     componentTypeViewModel.ComponentType.ComponentCategoryTypes = componentCategoryTypes;
                 }
+
+                var image = new ESImage();
+                Bitmap target = new Bitmap(64, 64);
+                Bitmap imageFullSize;
+                if (componentTypeViewModel.Image != null)
+                {
+                    using (var memoryStream = new MemoryStream())
+                    {
+                        await componentTypeViewModel.Image.CopyToAsync(memoryStream);
+                        image.ImageData = memoryStream.ToArray();
+                        imageFullSize = new Bitmap(memoryStream);
+                    }
+
+                    using (var graphics = Graphics.FromImage(target))
+                    {
+                        graphics.CompositingQuality = CompositingQuality.HighSpeed;
+                        graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        graphics.CompositingMode = CompositingMode.SourceCopy;
+                        graphics.DrawImage(imageFullSize, 0, 0, 64, 64);
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            target.Save(memoryStream, ImageFormat.Png);
+                            image.Thumbnail = memoryStream.ToArray();
+                        }
+                    }
+                    image.ImageMimeType = "image/png";
+                    componentTypeViewModel.ComponentType.Image = image;
+                    _context.EsImages.Add(image);
+                }
+
                 _context.Update(componentTypeViewModel.ComponentType);
                 await _context.SaveChangesAsync();
             }
@@ -268,6 +332,17 @@ namespace WebDel3Part2.Controllers
             _context.ComponentType.Remove(componentType);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> ComponentTypeList(long? id)
+        {
+            var componentTypes = await _context.ComponentCategoryTypes.Where(x => x.CategoryId == id).Include(x => x.ComponentType).Select(x => x.ComponentType).ToListAsync();
+            return View(componentTypes);
+        }
+
+        public async Task<IActionResult> ComponentList(long? id)
+        {
+            return View(await _context.Component.Where(x => x.ComponentTypeId == id).ToListAsync());
         }
 
         private bool ComponentTypeExists(long id)

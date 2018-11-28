@@ -26,5 +26,6 @@ namespace WebDel3Part2.Data
         public DbSet<WebDel3Part2.Models.Category> Category { get; set; }
         public DbSet<WebDel3Part2.Models.ComponentType> ComponentType { get; set; }
         public DbSet<ComponentCategoryType> ComponentCategoryTypes { get; set; }
+        public DbSet<ESImage> EsImages { get; set; }
     }
 }

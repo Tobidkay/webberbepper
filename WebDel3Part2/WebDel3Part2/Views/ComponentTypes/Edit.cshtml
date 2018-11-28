@@ -10,22 +10,26 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ComponentType.ComponentTypeId" />
+            <input type="hidden" asp-for="ComponentType.ComponentTypeId"/>
+            <div class="form-group">
+                <label asp-for="Image"></label>
+                <input asp-for="Image" type="file" class="form-control"/>
+            </div>
             <div class="form-group">
                 <label asp-for="ComponentType.ComponentName" class="control-label"></label>
-                <input asp-for="ComponentType.ComponentName" class="form-control" />
+                <input asp-for="ComponentType.ComponentName" class="form-control"/>
                 <span asp-validation-for="ComponentType.ComponentName" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ComponentType.ComponentInfo" class="control-label"></label>
-                <input asp-for="ComponentType.ComponentInfo" class="form-control" />
+                <input asp-for="ComponentType.ComponentInfo" class="form-control"/>
                 <span asp-validation-for="ComponentType.ComponentInfo" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ComponentType.Location" class="control-label"></label>
-                <input asp-for="ComponentType.Location" class="form-control" />
+                <input asp-for="ComponentType.Location" class="form-control"/>
                 <span asp-validation-for="ComponentType.Location" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -35,27 +39,27 @@
             </div>
             <div class="form-group">
                 <label asp-for="ComponentType.Datasheet" class="control-label"></label>
-                <input asp-for="ComponentType.Datasheet" class="form-control" />
+                <input asp-for="ComponentType.Datasheet" class="form-control"/>
                 <span asp-validation-for="ComponentType.Datasheet" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ComponentType.ImageUrl" class="control-label"></label>
-                <input asp-for="ComponentType.ImageUrl" class="form-control" />
+                <input asp-for="ComponentType.ImageUrl" class="form-control"/>
                 <span asp-validation-for="ComponentType.ImageUrl" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ComponentType.Manufacturer" class="control-label"></label>
-                <input asp-for="ComponentType.Manufacturer" class="form-control" />
+                <input asp-for="ComponentType.Manufacturer" class="form-control"/>
                 <span asp-validation-for="ComponentType.Manufacturer" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ComponentType.WikiLink" class="control-label"></label>
-                <input asp-for="ComponentType.WikiLink" class="form-control" />
+                <input asp-for="ComponentType.WikiLink" class="form-control"/>
                 <span asp-validation-for="ComponentType.WikiLink" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ComponentType.AdminComment" class="control-label"></label>
-                <input asp-for="ComponentType.AdminComment" class="form-control" />
+                <input asp-for="ComponentType.AdminComment" class="form-control"/>
                 <span asp-validation-for="ComponentType.AdminComment" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -63,7 +67,7 @@
                 <select asp-for="ChoosenCategories" multiple="multiple" asp-items="Model.Categories"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default"/>
             </div>
         </form>
     </div>
