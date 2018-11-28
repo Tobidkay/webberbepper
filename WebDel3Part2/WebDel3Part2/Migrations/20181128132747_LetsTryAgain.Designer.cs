@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebDel3Part2.Data;
 
-namespace WebDel3Part2.Data.Migrations
+namespace WebDel3Part2.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181128132747_LetsTryAgain")]
+    partial class LetsTryAgain
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,7 +238,7 @@ namespace WebDel3Part2.Data.Migrations
 
                     b.HasIndex("ComponentTypeId1");
 
-                    b.ToTable("ComponentCategoryType");
+                    b.ToTable("ComponentCategoryTypes");
                 });
 
             modelBuilder.Entity("WebDel3Part2.Models.ComponentType", b =>

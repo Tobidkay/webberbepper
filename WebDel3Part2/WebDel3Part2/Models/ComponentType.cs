@@ -21,6 +21,6 @@ namespace WebDel3Part2.Models
         public string AdminComment { get; set; }
         public virtual ESImage Image { get; set; }
         public ICollection<Component> Components { get; protected set; }
-        public ICollection<ComponentCategoryType> ComponentCategoryTypes { get; protected set; }
+        public ICollection<ComponentCategoryType> ComponentCategoryTypes { get; set; }
     }
 }

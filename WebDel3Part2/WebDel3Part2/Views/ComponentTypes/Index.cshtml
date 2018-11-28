@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WebDel3Part2.Models.ComponentType>
+﻿@model IEnumerable<WebDel3Part2.ViewModels.ComTypeViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,31 +13,34 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ComponentName)
+                @Html.DisplayNameFor(model => model.ComponentType.ComponentName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ComponentInfo)
+                @Html.DisplayNameFor(model => model.ComponentType.ComponentInfo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Location)
+                @Html.DisplayNameFor(model => model.ComponentType.Location)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Status)
+                @Html.DisplayNameFor(model => model.ComponentType.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Datasheet)
+                @Html.DisplayNameFor(model => model.ComponentType.Datasheet)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
+                @Html.DisplayNameFor(model => model.ComponentType.ImageUrl)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Manufacturer)
+                @Html.DisplayNameFor(model => model.ComponentType.Manufacturer)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.WikiLink)
+                @Html.DisplayNameFor(model => model.ComponentType.WikiLink)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AdminComment)
+                @Html.DisplayNameFor(model => model.ComponentType.AdminComment)
+            </th>
+            <th>
+                Categories
             </th>
             <th></th>
         </tr>
@@ -46,36 +49,42 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ComponentName)
+                @Html.DisplayFor(modelItem => item.ComponentType.ComponentName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ComponentInfo)
+                @Html.DisplayFor(modelItem => item.ComponentType.ComponentInfo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Location)
+                @Html.DisplayFor(modelItem => item.ComponentType.Location)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Enum.GetName(typeof(ComponentStatus), item.ComponentType.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Datasheet)
+                @Html.DisplayFor(modelItem => item.ComponentType.Datasheet)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
+                @Html.DisplayFor(modelItem => item.ComponentType.ImageUrl)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Manufacturer)
+                @Html.DisplayFor(modelItem => item.ComponentType.Manufacturer)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.WikiLink)
+                @Html.DisplayFor(modelItem => item.ComponentType.WikiLink)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.AdminComment)
+                @Html.DisplayFor(modelItem => item.ComponentType.AdminComment)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ComponentTypeId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ComponentTypeId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ComponentTypeId">Delete</a>
+                @foreach (var categoryName in item.ChoosenCategories)
+                {
+                    <p>@categoryName</p>
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ComponentType.ComponentTypeId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ComponentType.ComponentTypeId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ComponentType.ComponentTypeId">Delete</a>
             </td>
         </tr>
 }

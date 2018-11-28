@@ -1,6 +1,6 @@
 using System;
 
-namespace WebDel3Part2.Models
+namespace WebDel3Part2.ViewModels
 {
     public class ErrorViewModel
     {

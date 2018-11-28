@@ -23,9 +23,7 @@ namespace WebDel3Part2.Data
         }
         //Setting composit keys with fluent API
         public DbSet<WebDel3Part2.Models.Component> Component { get; set; }
-        //Setting composit keys with fluent API
         public DbSet<WebDel3Part2.Models.Category> Category { get; set; }
-        //Setting composit keys with fluent API
         public DbSet<WebDel3Part2.Models.ComponentType> ComponentType { get; set; }
         public DbSet<ComponentCategoryType> ComponentCategoryTypes { get; set; }
     }
