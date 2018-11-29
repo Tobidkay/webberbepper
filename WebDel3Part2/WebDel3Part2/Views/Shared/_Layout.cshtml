@@ -38,7 +38,7 @@
                     <li><a asp-area="" asp-controller="ComponentTypes" asp-action="Index">Component Types</a></li>
                     @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
                     {
-                        <li><a asp-area="" asp-controller="Admins" asp-action="Index">Admin</a></li>
+                        <li><a asp-area="" asp-controller="Users" asp-action="Index">Promote new admin</a></li>
                     }
                 </ul>
                 <partial name="_LoginPartial" />
