@@ -22,7 +22,7 @@ namespace WebDel3Part2.Models
         public string ImageUrl { get; set; }
         public string Manufacturer { get; set; }
         public string WikiLink { get; set; }
-        [DisplayName("Admin Comment")]
+        [DisplayName("UserWrapper Comment")]
         public string AdminComment { get; set; }
         public virtual ESImage Image { get; set; }
         public ICollection<Component> Components { get; protected set; }

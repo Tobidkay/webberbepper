@@ -11,7 +11,7 @@ namespace WebDel3Part2.Models
         [DisplayName("Serial#")]
         public string SerialNo { get; set; }
         public ComponentStatus Status { get; set; }
-        [DisplayName("Admin comment")]
+        [DisplayName("UserWrapper comment")]
         public string AdminComment { get; set; }
         [DisplayName("User comment")]
         public string UserComment { get; set; }

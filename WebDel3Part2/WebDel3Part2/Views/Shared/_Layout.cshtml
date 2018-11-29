@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -34,6 +36,10 @@
                     <li><a asp-area="" asp-controller="Categories" asp-action="Index">Categories</a></li>
                     <li><a asp-area="" asp-controller="Components" asp-action="Index">Components</a></li>
                     <li><a asp-area="" asp-controller="ComponentTypes" asp-action="Index">Component Types</a></li>
+                    @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
+                    {
+                        <li><a asp-area="" asp-controller="Admins" asp-action="Index">Admin</a></li>
+                    }
                 </ul>
                 <partial name="_LoginPartial" />
             </div>
