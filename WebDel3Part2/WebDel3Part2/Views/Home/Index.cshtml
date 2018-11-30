@@ -8,7 +8,7 @@
 <div>
     <h1>Welcome to embedded stock staff site</h1>
     @if (!(await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded) { 
-        <p>To do admin stuff you will have to login :) You big silly</p>   
+        <p>To do any stuff you will have to login :) You big silly. Go register for a staff account. To do admin stuff get an admin to promote your staff account</p>   
     }
     
 </div>
