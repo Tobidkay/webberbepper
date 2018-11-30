@@ -113,7 +113,7 @@ namespace WebDel3Part2.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(componentTypeViewModel);
+                return RedirectToAction(nameof(Edit), componentTypeViewModel.ComponentType.ComponentTypeId);
             }
 
             if (componentTypeViewModel.ChoosenCategories != null)
@@ -138,6 +138,11 @@ namespace WebDel3Part2.Controllers
             Bitmap imageFullSize;
             if (componentTypeViewModel.Image != null)
             {
+                var filename = Path.GetExtension(componentTypeViewModel.Image.FileName.ToLower());
+                if (!filename.Contains(".jpg") && !filename.Contains(".jpeg") && !filename.Contains(".png") && !filename.Contains(".bmp") && !filename.Contains(".gif"))
+                {
+                    return RedirectToAction(nameof(Edit), componentTypeViewModel.ComponentType.ComponentTypeId);
+                }
                 using (var memoryStream = new MemoryStream())
                 {
                     await componentTypeViewModel.Image.CopyToAsync(memoryStream);
@@ -157,7 +162,7 @@ namespace WebDel3Part2.Controllers
                         image.Thumbnail = memoryStream.ToArray();
                     }
                 }
-                image.ImageMimeType = "image/png";
+                image.ImageMimeType = "image/" + filename.Remove(0, 1);
                 componentTypeViewModel.ComponentType.Image = image;
                 _context.EsImages.Add(image);
             }
@@ -220,7 +225,7 @@ namespace WebDel3Part2.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(componentTypeViewModel);
+                return RedirectToAction(nameof(Edit), componentTypeViewModel.ComponentType.ComponentTypeId);
             }
             try
             {
@@ -248,6 +253,11 @@ namespace WebDel3Part2.Controllers
                 Bitmap imageFullSize;
                 if (componentTypeViewModel.Image != null)
                 {
+                    var filename = Path.GetExtension(componentTypeViewModel.Image.FileName.ToLower());
+                    if (!filename.Contains(".jpg") && !filename.Contains(".jpeg") && !filename.Contains(".png") && !filename.Contains(".bmp") && !filename.Contains(".gif"))
+                    {
+                        return RedirectToAction(nameof(Edit), componentTypeViewModel.ComponentType.ComponentTypeId);
+                    }
                     using (var memoryStream = new MemoryStream())
                     {
                         await componentTypeViewModel.Image.CopyToAsync(memoryStream);
@@ -267,7 +277,8 @@ namespace WebDel3Part2.Controllers
                             image.Thumbnail = memoryStream.ToArray();
                         }
                     }
-                    image.ImageMimeType = "image/png";
+
+                    image.ImageMimeType = "image/" + filename.Remove(0,1);
                     componentTypeViewModel.ComponentType.Image = image;
                     _context.EsImages.Add(image);
                 }
