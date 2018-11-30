@@ -42,7 +42,7 @@ namespace WebDel3Part2
 
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Admin"));
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Admin").RequireClaim("Staff"));
                 options.AddPolicy("StaffOrAdmin", policy => policy.RequireClaim("Staff"));
             });
 
