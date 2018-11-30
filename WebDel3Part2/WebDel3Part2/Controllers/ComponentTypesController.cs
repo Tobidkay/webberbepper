@@ -193,7 +193,7 @@ namespace WebDel3Part2.Controllers
             var categoryNames = new List<string>();
             foreach (var categoryId in categoryIds)
             {
-                var categoryName = await _context.Category.Where(cat => cat.CategoryId == id).Select(i => i.Name)
+                var categoryName = await _context.Category.Where(cat => cat.CategoryId == categoryId).Select(i => i.Name)
                     .FirstOrDefaultAsync();
                 if (categoryName != null)
                 {
