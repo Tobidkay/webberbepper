@@ -11,6 +11,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
+            Image
+        </dt>
+        <dd>
+            @if (Model.ComponentType.Image != null)
+            {
+                <img src="data:image;base64,@System.Convert.ToBase64String(Model.ComponentType.Image.ImageData)" />
+            }
+            else
+            {
+                <p>No Picture</p>
+            }
+        </dd>
+        <dt>
             @Html.DisplayNameFor(model => model.ComponentType.ComponentName)
         </dt>
         <dd>

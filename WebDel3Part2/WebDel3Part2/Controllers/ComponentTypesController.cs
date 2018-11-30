@@ -59,7 +59,7 @@ namespace WebDel3Part2.Controllers
                 return NotFound();
             }
 
-            var componentType = await _context.ComponentType
+            var componentType = await _context.ComponentType.Include(x => x.Image)
                 .FirstOrDefaultAsync(m => m.ComponentTypeId == id);
             if (componentType == null)
             {
@@ -72,7 +72,7 @@ namespace WebDel3Part2.Controllers
             var categoryNames = new List<string>();
             foreach (var categoryId in categoryIds)
             {
-                var categoryName = await _context.Category.Where(cat => cat.CategoryId == id).Select(i => i.Name)
+                var categoryName = await _context.Category.Where(cat => cat.CategoryId == categoryId).Select(i => i.Name)
                     .FirstOrDefaultAsync();
                 if (categoryName != null)
                 {
@@ -158,7 +158,7 @@ namespace WebDel3Part2.Controllers
                     graphics.DrawImage(imageFullSize, 0, 0, 64, 64);
                     using (var memoryStream = new MemoryStream())
                     {
-                        target.Save(memoryStream, ImageFormat.Png);
+                        target.Save(memoryStream, getImageFormat(filename));
                         image.Thumbnail = memoryStream.ToArray();
                     }
                 }
@@ -273,7 +273,7 @@ namespace WebDel3Part2.Controllers
                         graphics.DrawImage(imageFullSize, 0, 0, 64, 64);
                         using (var memoryStream = new MemoryStream())
                         {
-                            target.Save(memoryStream, ImageFormat.Png);
+                            target.Save(memoryStream, getImageFormat(filename));
                             image.Thumbnail = memoryStream.ToArray();
                         }
                     }
@@ -363,6 +363,25 @@ namespace WebDel3Part2.Controllers
         private bool ComponentTypeExists(long id)
         {
             return _context.ComponentType.Any(e => e.ComponentTypeId == id);
+        }
+
+        private ImageFormat getImageFormat(string extension)
+        {
+            switch (extension)
+            {
+                case ".jpg":
+                    return ImageFormat.Jpeg;
+                case ".jpeg":
+                    return ImageFormat.Jpeg;
+                case ".png":
+                    return ImageFormat.Png;
+                case ".gif":
+                    return ImageFormat.Gif;
+                case ".bmp":
+                    return ImageFormat.Bmp;
+                default:
+                    return ImageFormat.Png;
+            }
         }
     }
 }
